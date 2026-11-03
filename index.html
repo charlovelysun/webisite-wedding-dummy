@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Raden & Nadine | Undangan Pernikahan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom Luxury Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            800: '#1B3B2B',
+                            900: '#142E21',
+                            950: '#0E1F16',
+                        },
+                        gold: {
+                            light: '#F5E6BE',
+                            DEFAULT: '#C5A059',
+                            dark: '#9D7B38'
+                        },
+                        cream: '#FAF7F2'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#FAF7F2] text-stone-800 antialiased overflow-hidden selection:bg-[#C5A059]/30">
+
+    <!-- 1. FULLSCREEN OPENING COVER -->
+    <div id="cover-screen" class="cover-screen flex items-center justify-center p-6 text-white text-center">
+        <!-- Floating Floral / Gold Accents -->
+        <div class="max-w-md w-full glass-card-dark p-8 md:p-10 rounded-3xl border border-gold/40 shadow-2xl relative overflow-hidden animate-float">
+            <div class="absolute -top-12 -left-12 w-32 h-32 bg-gold/15 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-gold/15 rounded-full blur-2xl"></div>
+
+            <p class="text-xs uppercase tracking-[0.3em] text-gold-light font-medium mb-3">The Wedding Celebration</p>
+            <h1 class="font-heading text-4xl sm:text-5xl text-gold-gradient font-bold mb-4 tracking-wide">
+                Raden & Nadine
+            </h1>
+            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6"></div>
+
+            <p class="text-xs text-stone-300 tracking-wider mb-2">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <div class="bg-black/30 backdrop-blur-md px-5 py-3 rounded-2xl border border-gold/30 mb-8 inline-block max-w-full">
+                <h3 id="guest-cover-name" class="font-semibold text-lg sm:text-xl text-white truncate">
+                    Tamu Undangan Istimewa
+                </h3>
+            </div>
+
+            <p class="text-xs text-stone-300 italic mb-8 leading-relaxed max-w-xs mx-auto">
+                "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
+            </p>
+
+            <button id="btn-open-invitation" class="w-full py-3.5 px-6 rounded-xl bg-gold-gradient text-emerald-950 font-bold tracking-wider text-sm shadow-lg hover:shadow-gold/30 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2 group cursor-pointer pulse-gold">
+                <i data-lucide="mail-open" class="w-4 h-4 text-emerald-950 group-hover:rotate-12 transition"></i>
+                <span>BUKA UNDANGAN</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. FLOATING MUSIC TOGGLE -->
+    <div class="fixed bottom-6 left-6 z-40">
+        <button id="btn-audio-toggle" class="glass-card w-12 h-12 rounded-full flex items-center justify-center text-emerald-900 border border-gold/60 shadow-xl hover:scale-105 active:scale-95 transition cursor-pointer">
+            <div id="audio-disk" class="music-disk music-paused flex items-center justify-center">
+                <i data-lucide="disc" class="w-6 h-6 text-gold"></i>
+            </div>
+        </button>
+        <audio id="bg-audio" loop preload="auto">
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db6591201e.mp3?filename=romantic-piano-112199.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <!-- 3. TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-30 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-gold/20 py-3.5 px-4 sm:px-8">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <span class="font-heading font-bold text-xl sm:text-2xl text-emerald-900">R & N</span>
+                <span class="hidden sm:inline-block text-xs uppercase tracking-widest text-gold-dark font-medium border-l border-gold/40 pl-2">20.12.2026</span>
+            </a>
+
+            <!-- Quick Access Links to Admin and User Dashboard -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a id="btn-guest-ticket-link" href="user-dashboard.html" class="px-3.5 py-1.5 rounded-lg bg-emerald-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm hover:bg-emerald-900 transition">
+                    <i data-lucide="ticket" class="w-3.5 h-3.5 text-gold-light"></i>
+                    <span>Dashboard Tamu / E-Ticket</span>
+                </a>
+                <a href="admin.html" class="px-3 py-1.5 rounded-lg border border-gold/60 text-gold-dark text-xs font-semibold flex items-center gap-1 hover:bg-gold/10 transition">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    <span>Admin</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 4. HERO SECTION -->
+    <section class="relative min-h-[85vh] flex items-center justify-center text-center px-4 py-20 overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.75), rgba(250, 247, 242, 0.95)), url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&auto=format&fit=crop&q=80');">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <span class="text-xs uppercase tracking-[0.4em] text-gold-dark font-semibold block mb-3">Undangan Pernikahan</span>
+            <h1 class="font-heading text-5xl sm:text-7xl font-bold text-emerald-900 mb-4 tracking-tight">
+                Raden <span class="font-serif italic font-normal text-gold">&</span> Nadine
+            </h1>
+            <p class="font-serif text-lg sm:text-xl text-stone-600 mb-8 italic">
+                "Menyatukan dua insan dalam ikatan suci pernikahan"
+            </p>
+
+            <div class="inline-flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-gold/40 shadow-sm mb-10">
+                <i data-lucide="calendar" class="w-4 h-4 text-gold"></i>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider text-emerald-900">MINGGU, 20 DESEMBER 2026</span>
+                <span class="text-stone-300">•</span>
+                <span class="text-xs sm:text-sm font-medium text-stone-600">JAKARTA PUSAT</span>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto mb-10">
+                <div class="glass-card p-3 sm:p-4 rounded-2xl text-center">
+                    <span id="countdown-days" class="block font-heading text-2xl sm:text-3xl font-bold text-emerald-900">00</span>
+                    <span class="text-[10px] sm:text-xs text-stone-500 uppercase tracking-wider font-semibold">Hari</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl text-center">
+                    <span id="countdown-hours" class="block font-heading text-2xl sm:text-3xl font-bold text-emerald-900">00</span>
+                    <span class="text-[10px] sm:text-xs text-stone-500 uppercase tracking-wider font-semibold">Jam</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl text-center">
+                    <span id="countdown-minutes" class="block font-heading text-2xl sm:text-3xl font-bold text-emerald-900">00</span>
+                    <span class="text-[10px] sm:text-xs text-stone-500 uppercase tracking-wider font-semibold">Menit</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl text-center">
+                    <span id="countdown-seconds" class="block font-heading text-2xl sm:text-3xl font-bold text-emerald-900">00</span>
+                    <span class="text-[10px] sm:text-xs text-stone-500 uppercase tracking-wider font-semibold">Detik</span>
+                </div>
+            </div>
+
+            <a href="#rsvp-section" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-emerald-800 text-gold-light hover:bg-emerald-900 font-semibold text-xs tracking-wider uppercase shadow-lg hover:shadow-emerald-900/20 transition">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Konfirmasi Kehadiran (RSVP)</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 5. QURAN QUOTE SECTION -->
+    <section class="py-16 px-4 bg-white/60 border-y border-gold/20 text-center">
+        <div class="max-w-2xl mx-auto">
+            <span class="text-gold text-2xl">❦</span>
+            <p class="font-serif text-lg sm:text-xl text-stone-700 italic leading-relaxed my-4">
+                "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
+            </p>
+            <span class="text-xs uppercase tracking-widest text-emerald-900 font-bold block">QS. Ar-Rum: 21</span>
+        </div>
+    </section>
+
+    <!-- 6. COUPLE SECTION (BRIDE & GROOM) -->
+    <section class="py-24 px-4 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">The Happy Couple</span>
+            <h2 class="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mt-2">Mempelai Pengantin</h2>
+            <div class="w-20 h-0.5 bg-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <!-- Groom Card -->
+            <div class="glass-card p-8 rounded-3xl text-center relative overflow-hidden group hover:border-gold transition duration-300">
+                <div class="w-44 h-44 mx-auto rounded-full overflow-hidden p-1.5 border-2 border-gold shadow-xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80" alt="Raden Arya Pratama" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition duration-500">
+                </div>
+                <h3 class="font-heading text-2xl sm:text-3xl font-bold text-emerald-900">Raden Arya Pratama, S.T.</h3>
+                <span class="text-xs font-semibold text-gold-dark uppercase tracking-wider block mt-1">Mempelai Pria</span>
+                <p class="text-stone-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                    Putra pertama dari pasangan<br>
+                    <strong class="text-stone-800">Bpk. Bambang Pratama & Ibu Ratna Dewi</strong>
+                </p>
+                <div class="mt-5 inline-flex items-center gap-1.5 text-xs text-emerald-800 bg-stone-100 px-3 py-1 rounded-full font-medium">
+                    <i data-lucide="instagram" class="w-3.5 h-3.5 text-gold-dark"></i>
+                    <span>@radenarya</span>
+                </div>
+            </div>
+
+            <!-- Bride Card -->
+            <div class="glass-card p-8 rounded-3xl text-center relative overflow-hidden group hover:border-gold transition duration-300">
+                <div class="w-44 h-44 mx-auto rounded-full overflow-hidden p-1.5 border-2 border-gold shadow-xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80" alt="dr. Nadine Anindita Putri" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition duration-500">
+                </div>
+                <h3 class="font-heading text-2xl sm:text-3xl font-bold text-emerald-900">dr. Nadine Anindita Putri</h3>
+                <span class="text-xs font-semibold text-gold-dark uppercase tracking-wider block mt-1">Mempelai Wanita</span>
+                <p class="text-stone-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                    Putri bungsu dari pasangan<br>
+                    <strong class="text-stone-800">Bpk. Hendra Kusuma & Ibu Sri Rahayu</strong>
+                </p>
+                <div class="mt-5 inline-flex items-center gap-1.5 text-xs text-emerald-800 bg-stone-100 px-3 py-1 rounded-full font-medium">
+                    <i data-lucide="instagram" class="w-3.5 h-3.5 text-gold-dark"></i>
+                    <span>@nadineanindita</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. EVENT SCHEDULE & LOCATION SECTION -->
+    <section class="py-20 px-4 bg-emerald-900 text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-light font-semibold">Wedding Schedule</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mt-2">Waktu & Tempat Acara</h2>
+                <div class="w-20 h-0.5 bg-gold mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Akad Nikah Card -->
+                <div class="glass-card-dark p-8 rounded-3xl border border-gold/30 text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-gold/20 text-gold-light flex items-center justify-center mx-auto mb-4 border border-gold/40">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-gold-gradient mb-2">Akad Nikah</h3>
+                        <p class="text-xs text-stone-300 uppercase tracking-widest font-semibold mb-6">Khusus Keluarga Inti</p>
+
+                        <div class="space-y-3 text-sm text-stone-200">
+                            <div class="flex items-center justify-center gap-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-gold"></i>
+                                <span>Minggu, 20 Desember 2026</span>
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4 text-gold"></i>
+                                <span>08.00 - 10.00 WIB</span>
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-gold"></i>
+                                <span>Grand Ballroom The Hermitage Hotel, Menteng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gold/20 flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="https://maps.google.com/?q=The+Hermitage+Hotel+Jakarta" target="_blank" class="px-5 py-2.5 rounded-xl bg-gold-gradient text-emerald-950 text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 transition">
+                            <i data-lucide="navigation" class="w-4 h-4"></i>
+                            <span>Buka Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Resepsi Card -->
+                <div class="glass-card-dark p-8 rounded-3xl border border-gold/30 text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-gold/20 text-gold-light flex items-center justify-center mx-auto mb-4 border border-gold/40">
+                            <i data-lucide="sparkles" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-gold-gradient mb-2">Resepsi Pernikahan</h3>
+                        <p class="text-xs text-stone-300 uppercase tracking-widest font-semibold mb-6">Tamu Undangan & Kerabat</p>
+
+                        <div class="space-y-3 text-sm text-stone-200">
+                            <div class="flex items-center justify-center gap-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-gold"></i>
+                                <span>Minggu, 20 Desember 2026</span>
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4 text-gold"></i>
+                                <span>11.00 - 14.00 WIB</span>
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-gold"></i>
+                                <span>Grand Ballroom The Hermitage Hotel, Menteng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gold/20 flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Raden+%26+Nadine&dates=20261220T040000Z/20261220T070000Z&details=Pernikahan+Raden+%26+Nadine+di+The+Hermitage+Hotel+Jakarta&location=The+Hermitage+Hotel+Jakarta" target="_blank" class="px-5 py-2.5 rounded-xl bg-gold-gradient text-emerald-950 text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 transition">
+                            <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                            <span>Simpan ke Kalender</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. LOVE STORY TIMELINE -->
+    <section class="py-24 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">Our Journey</span>
+            <h2 class="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mt-2">Kisah Cinta Kami</h2>
+            <div class="w-20 h-0.5 bg-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="relative border-l-2 border-gold/40 ml-4 sm:ml-32 space-y-12">
+            <!-- Timeline Item 1 -->
+            <div class="relative pl-8 sm:pl-10">
+                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gold border-4 border-[#FAF7F2]"></div>
+                <span class="text-xs font-bold text-gold-dark uppercase tracking-wider block">Agustus 2023</span>
+                <h4 class="font-heading text-xl font-bold text-emerald-900 mt-1">Awal Pertemuan</h4>
+                <p class="text-stone-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                    Pertama kali bertemu dalam proyek renovasi klinik gigi di Jakarta Selatan. Dari sekadar obrolan konsep desain arsitektur, berlanjut ke diskusi hangat tentang impian masa depan.
+                </p>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="relative pl-8 sm:pl-10">
+                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gold border-4 border-[#FAF7F2]"></div>
+                <span class="text-xs font-bold text-gold-dark uppercase tracking-wider block">Januari 2026</span>
+                <h4 class="font-heading text-xl font-bold text-emerald-900 mt-1">Momen Lamaran</h4>
+                <p class="text-stone-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                    Di bawah lembayung senja Yogyakarta, Raden memberanikan diri meminta Nadine untuk menjadi pendamping seumur hidupnya, disambut senyum bahagia dan restu dari kedua keluarga.
+                </p>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="relative pl-8 sm:pl-10">
+                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gold border-4 border-[#FAF7F2]"></div>
+                <span class="text-xs font-bold text-gold-dark uppercase tracking-wider block">Desember 2026</span>
+                <h4 class="font-heading text-xl font-bold text-emerald-900 mt-1">Menuju Hari Bahagia</h4>
+                <p class="text-stone-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                    Dengan memohon ridho Allah SWT, kami mengikrarkan janji suci pernikahan, melangkah bersama membangun keluarga yang sakinah, mawaddah, dan warahmah.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. PHOTO GALLERY -->
+    <section class="py-20 px-4 bg-stone-100/70 border-y border-gold/20">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">Moments of Joy</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mt-2">Galeri Foto Prewedding</h2>
+                <div class="w-20 h-0.5 bg-gold mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="rounded-2xl overflow-hidden shadow-md cursor-pointer hover:scale-[1.02] transition duration-300 aspect-square" onclick="openLightbox('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&auto=format&fit=crop&q=80', 'Momen Prewedding The Hermitage')">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80" alt="Prewedding 1" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-md cursor-pointer hover:scale-[1.02] transition duration-300 aspect-square" onclick="openLightbox('https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&auto=format&fit=crop&q=80', 'Tatapan Kasih')">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&auto=format&fit=crop&q=80" alt="Prewedding 2" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-md cursor-pointer hover:scale-[1.02] transition duration-300 aspect-square" onclick="openLightbox('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&auto=format&fit=crop&q=80', 'Cincin Janji Suci')">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80" alt="Prewedding 3" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-md cursor-pointer hover:scale-[1.02] transition duration-300 aspect-square" onclick="openLightbox('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&auto=format&fit=crop&q=80', 'Genggaman Selamanya')">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&auto=format&fit=crop&q=80" alt="Prewedding 4" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. RSVP SECTION -->
+    <section id="rsvp-section" class="py-24 px-4 max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">Konfirmasi Kehadiran</span>
+            <h2 class="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mt-2">Reservasi & Buku Tamu</h2>
+            <div class="w-20 h-0.5 bg-gold mx-auto mt-4"></div>
+            <p class="text-stone-600 text-xs sm:text-sm mt-3 max-w-md mx-auto">
+                Mohon kesediaan Bapak/Ibu/Saudara/i untuk mengonfirmasi kehadiran demi kenyamanan bersama.
+            </p>
+        </div>
+
+        <div class="glass-card p-6 sm:p-10 rounded-3xl shadow-xl">
+            <form id="rsvp-form" class="space-y-6">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Nama Lengkap Anda</label>
+                    <input type="text" id="rsvp-name" required placeholder="Contoh: Budi Santoso & Istri" class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-emerald-800 text-sm bg-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Konfirmasi Kehadiran</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 bg-white cursor-pointer hover:border-emerald-800 transition">
+                            <input type="radio" name="attendance" value="hadir" checked class="text-emerald-800 focus:ring-emerald-800">
+                            <span class="text-xs sm:text-sm font-semibold text-emerald-900">✓ Ya, Saya Hadir</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 bg-white cursor-pointer hover:border-rose-800 transition">
+                            <input type="radio" name="attendance" value="tidak" class="text-rose-800 focus:ring-rose-800">
+                            <span class="text-xs sm:text-sm font-semibold text-stone-700">✕ Berhalangan Hadir</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Jumlah Tamu Hadir</label>
+                    <select id="rsvp-pax" class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-emerald-800 text-sm bg-white">
+                        <option value="1">1 Orang</option>
+                        <option value="2" selected>2 Orang (Bersama Pasangan)</option>
+                        <option value="3">3 Orang</option>
+                        <option value="4">4 Orang (Keluarga)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Ucapan & Doa Restu</label>
+                    <textarea id="rsvp-message" rows="4" required placeholder="Tuliskan doa restu dan pesan hangat untuk kedua mempelai..." class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-emerald-800 text-sm bg-white"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-xl bg-emerald-800 text-gold-light hover:bg-emerald-900 font-bold text-sm tracking-wider uppercase shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>KIRIM KONFIRMASI & DOA</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 11. WISHES & BLESSINGS WALL -->
+    <section id="wishes-section" class="py-16 px-4 bg-white/70 border-t border-gold/20">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-gold-dark font-semibold">Doa & Ucapan</span>
+                    <h3 class="font-heading text-2xl sm:text-3xl font-bold text-emerald-900">Untaian Doa Restu</h3>
+                </div>
+                <span id="total-wishes-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                    4 Ucapan
+                </span>
+            </div>
+
+            <!-- Scrollable Wishes Wall -->
+            <div id="wishes-list" class="max-h-[480px] overflow-y-auto pr-2 space-y-3">
+                <!-- Dynamically populated from assets/js/invitation.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. DIGITAL ENVELOPE / WEDDING GIFT -->
+    <section class="py-24 px-4 bg-stone-100/80">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">Tanda Kasih</span>
+            <h2 class="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mt-2">Amplop Digital</h2>
+            <div class="w-20 h-0.5 bg-gold mx-auto mt-4 mb-4"></div>
+            <p class="text-stone-600 text-xs sm:text-sm max-w-md mx-auto mb-12">
+                Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan tanda kasih berupa kado fisik maupun digital, Anda dapat melalui rekening di bawah ini:
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- BCA Card -->
+                <div class="glass-card p-6 rounded-2xl border border-gold/40 text-left relative overflow-hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-lg text-blue-900">Bank BCA</span>
+                        <i data-lucide="credit-card" class="w-5 h-5 text-gold-dark"></i>
+                    </div>
+                    <span class="text-xs text-stone-500 block uppercase">Nomor Rekening</span>
+                    <div class="font-mono text-lg font-bold text-stone-800 my-1">8830192841</div>
+                    <span class="text-xs text-stone-600 block mb-4">a.n Raden Arya Pratama</span>
+                    <button onclick="copyToClipboard('8830192841', 'BCA')" class="w-full py-2 px-3 rounded-lg bg-emerald-800 text-white text-xs font-semibold hover:bg-emerald-900 transition flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Salin No. Rekening</span>
+                    </button>
+                </div>
+
+                <!-- Mandiri Card -->
+                <div class="glass-card p-6 rounded-2xl border border-gold/40 text-left relative overflow-hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-lg text-amber-900">Bank Mandiri</span>
+                        <i data-lucide="credit-card" class="w-5 h-5 text-gold-dark"></i>
+                    </div>
+                    <span class="text-xs text-stone-500 block uppercase">Nomor Rekening</span>
+                    <div class="font-mono text-lg font-bold text-stone-800 my-1">1370019283741</div>
+                    <span class="text-xs text-stone-600 block mb-4">a.n Nadine Anindita Putri</span>
+                    <button onclick="copyToClipboard('1370019283741', 'Mandiri')" class="w-full py-2 px-3 rounded-lg bg-emerald-800 text-white text-xs font-semibold hover:bg-emerald-900 transition flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Salin No. Rekening</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kirim Kado Fisik -->
+            <div class="mt-8 p-6 glass-card rounded-2xl max-w-xl mx-auto text-center border border-gold/30">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-900 uppercase tracking-wider mb-2">
+                    <i data-lucide="gift" class="w-4 h-4 text-gold"></i>
+                    <span>Kirim Kado Fisik</span>
+                </div>
+                <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                    Jl. Menteng Indah Blok C3 No. 12, Menteng, Jakarta Pusat 10310<br>
+                    <span class="font-semibold text-stone-800">Penerima: Raden / dr. Nadine (0812-3456-7890)</span>
+                </p>
+                <button onclick="copyToClipboard('Jl. Menteng Indah Blok C3 No. 12, Menteng, Jakarta Pusat 10310 (Penerima: Raden / Nadine)', 'Alamat')" class="mt-3 text-xs text-emerald-800 hover:text-emerald-950 font-semibold underline flex items-center gap-1 mx-auto cursor-pointer">
+                    <i data-lucide="copy" class="w-3 h-3"></i> Salin Alamat Kirim
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. PROTOCOL & DRESSCODE -->
+    <section class="py-16 px-4 bg-white text-center border-t border-stone-200">
+        <div class="max-w-2xl mx-auto">
+            <h4 class="font-heading text-xl font-bold text-emerald-900 mb-6">Dresscode & Tata Tertib Acara</h4>
+            <div class="flex items-center justify-center gap-8 mb-6">
+                <div>
+                    <div class="w-10 h-10 rounded-full bg-[#2C4A3E] border-2 border-gold mx-auto mb-1"></div>
+                    <span class="text-[11px] text-stone-600 block">Emerald Green</span>
+                </div>
+                <div>
+                    <div class="w-10 h-10 rounded-full bg-[#E5D2A6] border-2 border-gold mx-auto mb-1"></div>
+                    <span class="text-[11px] text-stone-600 block">Champagne / Gold</span>
+                </div>
+                <div>
+                    <div class="w-10 h-10 rounded-full bg-[#FAF7F2] border-2 border-stone-300 mx-auto mb-1"></div>
+                    <span class="text-[11px] text-stone-600 block">Ivory / Putih</span>
+                </div>
+            </div>
+            <p class="text-xs text-stone-500 leading-relaxed">
+                Demi kenyamanan bersama, para tamu undangan dimohon untuk berpakaian rapi / formal sesuai dengan tema warna di atas.
+            </p>
+        </div>
+    </section>
+
+    <!-- 14. FOOTER -->
+    <footer class="bg-emerald-950 text-white py-12 px-4 text-center border-t border-gold/30">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-heading text-3xl sm:text-4xl text-gold-gradient font-bold mb-3">Raden & Nadine</h2>
+            <p class="font-serif italic text-stone-400 text-sm mb-6">
+                Terima kasih atas doa dan restu yang Anda berikan kepada kami berdua.
+            </p>
+            <div class="flex items-center justify-center gap-6 text-xs text-stone-400">
+                <a href="user-dashboard.html" class="hover:text-gold transition">Dashboard Tamu</a>
+                <span>•</span>
+                <a href="admin.html" class="hover:text-gold transition">Dashboard Admin</a>
+            </div>
+            <div class="mt-8 pt-6 border-t border-white/10 text-[11px] text-stone-500">
+                &copy; 2026 The Wedding of Raden & Nadine. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-gold transition p-2 cursor-pointer">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div class="max-w-4xl max-h-[90vh] flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Gallery Preview" class="max-h-[80vh] w-auto rounded-xl shadow-2xl object-contain">
+            <p id="lightbox-caption" class="text-stone-300 text-sm mt-3 font-serif italic text-center"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/invitation.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

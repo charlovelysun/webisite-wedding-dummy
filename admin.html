@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard & Buku Tamu Digital | Wedding of Raden & Nadine</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            800: '#1B3B2B',
+                            900: '#142E21',
+                            950: '#0E1F16',
+                        },
+                        gold: {
+                            light: '#F5E6BE',
+                            DEFAULT: '#C5A059',
+                            dark: '#9D7B38'
+                        },
+                        cream: '#FAF7F2'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased min-h-screen flex flex-col selection:bg-[#C5A059]/30">
+
+    <!-- Top Admin Header -->
+    <header class="bg-emerald-950 text-white border-b border-emerald-900 sticky top-0 z-30 py-3.5 px-4 sm:px-8 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gold-gradient text-emerald-950 flex items-center justify-center font-bold text-sm shadow-md">
+                    W
+                </div>
+                <div>
+                    <h1 class="font-heading font-bold text-lg text-white leading-tight">Admin & Buku Tamu Digital</h1>
+                    <p class="text-[11px] text-gold-light">The Wedding of Raden & Nadine • 20 Des 2026</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Actions -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <button id="btn-export-csv" class="px-3 py-1.5 rounded-lg bg-emerald-900 border border-emerald-700 hover:bg-emerald-800 text-xs text-white font-medium flex items-center gap-1.5 transition">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-gold-light"></i>
+                    <span>Export CSV</span>
+                </button>
+                <a href="user-dashboard.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-900 border border-emerald-700 hover:bg-emerald-800 text-xs text-white font-medium flex items-center gap-1.5 transition">
+                    <i data-lucide="ticket" class="w-3.5 h-3.5 text-gold-light"></i>
+                    <span>Dashboard Tamu</span>
+                </a>
+                <a href="index.html" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-gold-gradient text-emerald-950 font-bold text-xs flex items-center gap-1.5 shadow hover:opacity-95 transition">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span>Lihat Undangan</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 flex-1 space-y-6">
+
+        <!-- 1. STATISTIC METRIC CARDS -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4">
+            <!-- Total Undangan -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between text-stone-500 mb-2">
+                    <span class="text-xs uppercase font-bold tracking-wider">Total Tamu</span>
+                    <i data-lucide="users" class="w-4 h-4 text-stone-400"></i>
+                </div>
+                <div>
+                    <h3 id="stat-total-guests" class="text-2xl sm:text-3xl font-bold font-heading text-stone-900">0</h3>
+                    <span id="stat-total-pax" class="text-xs text-stone-400">0 Pax Kuota</span>
+                </div>
+            </div>
+
+            <!-- Konfirmasi Hadir -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between text-emerald-700 mb-2">
+                    <span class="text-xs uppercase font-bold tracking-wider">Pasti Hadir</span>
+                    <i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <div>
+                    <h3 id="stat-attending-count" class="text-2xl sm:text-3xl font-bold font-heading text-emerald-800">0</h3>
+                    <span id="stat-attending-pax" class="text-xs text-emerald-600 font-medium">0 Pax</span>
+                </div>
+            </div>
+
+            <!-- Belum Konfirmasi -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between text-amber-700 mb-2">
+                    <span class="text-xs uppercase font-bold tracking-wider">Pending / Belum</span>
+                    <i data-lucide="clock" class="w-4 h-4 text-amber-600"></i>
+                </div>
+                <div>
+                    <h3 id="stat-pending-count" class="text-2xl sm:text-3xl font-bold font-heading text-amber-800">0</h3>
+                    <span class="text-xs text-amber-600">Belum merespon</span>
+                </div>
+            </div>
+
+            <!-- Sudah Check-in (Hari-H) -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between text-blue-700 mb-2">
+                    <span class="text-xs uppercase font-bold tracking-wider">Telah Hadir (Check-in)</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div>
+                    <h3 id="stat-checkedin-count" class="text-2xl sm:text-3xl font-bold font-heading text-blue-900">0 Tamu</h3>
+                    <span class="text-xs text-blue-600 font-medium">Buku Tamu Masuk</span>
+                </div>
+            </div>
+
+            <!-- Amplop Digital Masuk -->
+            <div class="col-span-2 md:col-span-1 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between text-gold-dark mb-2">
+                    <span class="text-xs uppercase font-bold tracking-wider">Amplop Digital</span>
+                    <i data-lucide="wallet" class="w-4 h-4 text-gold-dark"></i>
+                </div>
+                <div>
+                    <h3 id="stat-gift-amount" class="text-lg sm:text-xl font-bold font-heading text-stone-900 truncate">Rp 0</h3>
+                    <span class="text-xs text-stone-400">Total Tanda Kasih</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. NAVIGATION TABS -->
+        <div class="flex items-center gap-1.5 sm:gap-2 border-b border-stone-200 pb-2 overflow-x-auto">
+            <button data-tab="guests" class="admin-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-emerald-800 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                <i data-lucide="users" class="w-4 h-4"></i>
+                <span>Daftar Tamu & Undangan</span>
+            </button>
+            <button data-tab="scanner" class="admin-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-600 hover:bg-stone-100 transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                <i data-lucide="scan-line" class="w-4 h-4"></i>
+                <span>Buku Tamu & Scanner QR</span>
+            </button>
+            <button data-tab="wishes" class="admin-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-600 hover:bg-stone-100 transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+                <span>Ucapan & Doa</span>
+            </button>
+            <button data-tab="gifts" class="admin-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-600 hover:bg-stone-100 transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                <i data-lucide="gift" class="w-4 h-4"></i>
+                <span>Amplop & Hadiah</span>
+            </button>
+            <button data-tab="settings" class="admin-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-600 hover:bg-stone-100 transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                <i data-lucide="settings" class="w-4 h-4"></i>
+                <span>Pengaturan Acara</span>
+            </button>
+        </div>
+
+        <!-- 3. TAB 1: GUEST LIST & INVITATIONS -->
+        <section id="tab-guests" class="tab-panel space-y-4">
+            <!-- Filter & Action Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+                <div class="flex flex-col sm:flex-row items-center gap-2 w-full md:w-auto">
+                    <!-- Search Input -->
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-stone-400"></i>
+                        <input type="text" id="search-guest" placeholder="Cari nama, kode, meja..." class="w-full pl-9 pr-4 py-2 rounded-xl border border-stone-200 text-xs bg-stone-50 focus:outline-none focus:ring-1 focus:ring-emerald-800">
+                    </div>
+
+                    <!-- Category Filter -->
+                    <select id="filter-category" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-200 text-xs bg-stone-50">
+                        <option value="all">Semua Kategori</option>
+                        <option value="VIP">VIP</option>
+                        <option value="Keluarga">Keluarga</option>
+                        <option value="Sahabat">Sahabat</option>
+                        <option value="Teman Kantor">Teman Kantor</option>
+                    </select>
+
+                    <!-- Status Filter -->
+                    <select id="filter-status" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-200 text-xs bg-stone-50">
+                        <option value="all">Semua Status</option>
+                        <option value="hadir">Hadir</option>
+                        <option value="tidak">Tidak Hadir</option>
+                        <option value="belum">Belum Respon</option>
+                    </select>
+                </div>
+
+                <button onclick="openAddGuestModal()" class="w-full md:w-auto px-4 py-2 rounded-xl bg-emerald-800 text-gold-light hover:bg-emerald-900 text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                    <span>Tambah Tamu Baru</span>
+                </button>
+            </div>
+
+            <!-- Table of Guests -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-100/70 border-b border-stone-200 text-[11px] uppercase tracking-wider text-stone-600 font-semibold">
+                                <th class="py-3 px-4">Kode</th>
+                                <th class="py-3 px-4">Nama Tamu</th>
+                                <th class="py-3 px-4">Kategori</th>
+                                <th class="py-3 px-4">Meja & Pax</th>
+                                <th class="py-3 px-4">Kehadiran</th>
+                                <th class="py-3 px-4">Check-In Hari H</th>
+                                <th class="py-3 px-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guest-table-body" class="divide-y divide-stone-100">
+                            <!-- Populated dynamically by admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TAB 2: BUKU TAMU DIGITAL & QR SCANNER -->
+        <section id="tab-scanner" class="tab-panel hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Check-in Input Form -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
+                                <i data-lucide="scan" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading text-xl font-bold text-stone-900">Check-in Tamu Resepsi</h3>
+                                <p class="text-stone-500 text-xs">Ketik kode tamu atau scan barcode/QR E-Ticket dari tamu</p>
+                            </div>
+                        </div>
+
+                        <form id="form-scanner" class="flex gap-2">
+                            <input type="text" id="scanner-input" placeholder="Masukkan kode tamu (contoh: WED-001)" class="flex-1 px-4 py-3 rounded-xl border-2 border-emerald-800/40 text-sm font-mono tracking-wider focus:outline-none focus:border-emerald-800 bg-stone-50">
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-emerald-900 transition flex items-center gap-1.5 cursor-pointer shadow">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                                <span>Check-In</span>
+                            </button>
+                        </form>
+
+                        <!-- Quick Test Shortcut Buttons -->
+                        <div class="mt-4 pt-4 border-t border-stone-200/80 flex items-center gap-2 flex-wrap">
+                            <span class="text-xs text-stone-400 font-medium">Uji Coba Cepat:</span>
+                            <button onclick="processCheckIn('WED-001')" class="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 font-mono text-xs cursor-pointer">WED-001 (Budi - VIP)</button>
+                            <button onclick="processCheckIn('WED-002')" class="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 font-mono text-xs cursor-pointer">WED-002 (Siti - Keluarga)</button>
+                            <button onclick="processCheckIn('WED-003')" class="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 font-mono text-xs cursor-pointer">WED-003 (Reza - Sahabat)</button>
+                        </div>
+
+                        <!-- Scanner Result Display -->
+                        <div id="scanner-result" class="mt-6">
+                            <div class="p-6 bg-stone-50 rounded-2xl border border-dashed border-stone-300 text-center text-stone-400 text-xs">
+                                Hasil check-in tamu akan muncul di sini secara real-time.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Check-ins Log -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm flex flex-col">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-100">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="history" class="w-4 h-4 text-emerald-800"></i>
+                            <h4 class="font-bold text-stone-900 text-sm">Riwayat Check-In Hari-H</h4>
+                        </div>
+                    </div>
+
+                    <div id="recent-checkins-feed" class="space-y-2 flex-1 max-h-[380px] overflow-y-auto pr-1">
+                        <!-- Populated by admin.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. TAB 3: WISHES MODERATION -->
+        <section id="tab-wishes" class="tab-panel hidden space-y-4">
+            <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="font-heading text-xl font-bold text-stone-900">Moderasi Doa & Ucapan</h3>
+                        <p class="text-stone-500 text-xs">Kelola doa restu dari tamu, sematkan pesan istimewa atau hapus komentar.</p>
+                    </div>
+                </div>
+
+                <div id="admin-wishes-list" class="space-y-3">
+                    <!-- Populated by admin.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TAB 4: GIFTS & AMPLOP DIGITAL -->
+        <section id="tab-gifts" class="tab-panel hidden space-y-4">
+            <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="font-heading text-xl font-bold text-stone-900">Catatan Tanda Kasih & Amplop Digital</h3>
+                        <p class="text-stone-500 text-xs">Daftar transfer hadiah dan amplop pernikahan yang telah terkonfirmasi.</p>
+                    </div>
+                </div>
+
+                <div id="admin-gifts-list" class="space-y-3">
+                    <!-- Populated by admin.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. TAB 5: EVENT SETTINGS -->
+        <section id="tab-settings" class="tab-panel hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-3xl">
+                <div class="mb-6">
+                    <h3 class="font-heading text-xl font-bold text-stone-900">Pengaturan Informasi Acara</h3>
+                    <p class="text-stone-500 text-xs">Sesuaikan nama pengantin, tanggal, lokasi, dan rekening bank.</p>
+                </div>
+
+                <form id="form-settings" class="space-y-5 text-xs sm:text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Nama Lengkap Pengantin Pria</label>
+                            <input type="text" id="set-groom-name" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Nama Lengkap Pengantin Wanita</label>
+                            <input type="text" id="set-bride-name" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Tanggal Pernikahan (YYYY-MM-DD)</label>
+                            <input type="date" id="set-wedding-date" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Jam Akad (HH:MM)</label>
+                            <input type="time" id="set-wedding-time" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Lokasi Akad Nikah</label>
+                        <input type="text" id="set-akad-venue" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Lokasi Resepsi Pernikahan</label>
+                        <input type="text" id="set-resepsi-venue" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Rekening Bank 1</label>
+                            <input type="text" id="set-bank-1" readonly class="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-100 text-stone-600">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Rekening Bank 2</label>
+                            <input type="text" id="set-bank-2" readonly class="w-full px-3 py-2 rounded-xl border border-stone-200 bg-stone-100 text-stone-600">
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex items-center justify-between border-t border-stone-200">
+                        <button type="button" id="btn-reset-db" class="px-4 py-2 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold hover:bg-rose-100 transition cursor-pointer">
+                            Reset ke Data Default
+                        </button>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-emerald-900 transition cursor-pointer shadow">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODAL ADD & EDIT GUEST -->
+    <div id="modal-add-guest" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeGuestModal()" class="absolute top-5 right-5 text-stone-400 hover:text-stone-700 cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <h3 id="modal-guest-title" class="font-heading text-xl font-bold text-stone-900 mb-1">Tambah Tamu Undangan Baru</h3>
+            <p class="text-xs text-stone-500 mb-6">Data ini akan otomatis menghasilkan E-Ticket dan Link Undangan WhatsApp khusus.</p>
+
+            <form id="form-guest" class="space-y-4 text-xs sm:text-sm">
+                <input type="hidden" id="guest-edit-id">
+
+                <div>
+                    <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Nama Tamu *</label>
+                    <input type="text" id="input-guest-name" required placeholder="Contoh: Bapak Ir. Hendarto & Istri" class="w-full px-3 py-2 rounded-xl border border-stone-300 focus:ring-1 focus:ring-emerald-800">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Kategori</label>
+                        <select id="input-guest-category" class="w-full px-3 py-2 rounded-xl border border-stone-300">
+                            <option value="VIP">VIP</option>
+                            <option value="Keluarga">Keluarga</option>
+                            <option value="Sahabat" selected>Sahabat</option>
+                            <option value="Teman Kantor">Teman Kantor</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Nomor WhatsApp / HP</label>
+                        <input type="text" id="input-guest-phone" placeholder="Contoh: 081234567890" class="w-full px-3 py-2 rounded-xl border border-stone-300">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Alokasi Pax (Kursi)</label>
+                        <input type="number" id="input-guest-pax" value="2" min="1" max="10" class="w-full px-3 py-2 rounded-xl border border-stone-300">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Nomor Meja</label>
+                        <input type="text" id="input-guest-table" placeholder="Contoh: VIP-A3 atau Reguler" class="w-full px-3 py-2 rounded-xl border border-stone-300">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Status Kehadiran</label>
+                    <select id="input-guest-status" class="w-full px-3 py-2 rounded-xl border border-stone-300">
+                        <option value="belum">Belum Respon (Pending)</option>
+                        <option value="hadir">Pasti Hadir</option>
+                        <option value="tidak">Tidak Hadir</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-stone-700 uppercase tracking-wider text-[11px] mb-1">Catatan Tambahan (Opsional)</label>
+                    <input type="text" id="input-guest-notes" placeholder="Contoh: Rekan bisnis atau keluarga besar" class="w-full px-3 py-2 rounded-xl border border-stone-300">
+                </div>
+
+                <div class="pt-4 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeGuestModal()" class="px-4 py-2 rounded-xl border border-stone-300 text-stone-700 font-semibold hover:bg-stone-50 cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-800 text-white font-bold hover:bg-emerald-900 cursor-pointer shadow">
+                        Simpan Data Tamu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-4 px-4 text-center text-xs text-stone-500">
+        &copy; 2026 Admin Dashboard & Buku Tamu Digital • The Wedding of Raden & Nadine
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/admin.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
